@@ -298,3 +298,7 @@ LABEL org.opencontainers.image.source=https://github.com/twentyhq/twenty
 LABEL org.opencontainers.image.description="All-in-one Twenty image for local development and SDK usage. Includes PostgreSQL, Redis, server, and worker."
 
 ENTRYPOINT ["/init"]
+
+
+# Railway builds the final stage and runs Postgres and Redis as separate services.
+FROM twenty AS twenty-railway
