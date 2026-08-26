@@ -1,0 +1,5 @@
+{
+  "invoices": [{ "id": 7, "clientid": 17, "formatted_number": "INV-2026-007", "status": 3, "date": "2026-08-01", "duedate": "2026-08-15", "subtotal": "100.00", "total_tax": "8.25", "discount_total": "5.00", "adjustment": "-1.00", "total": "102.25", "currency_code": "USD", "amount_paid": "25.00", "balance_due": "77.25", "payment_total": "25.00", "credit_total": "0.00" }],
+  "items": [{ "id": 9, "rel_id": 7, "rel_type": "invoice", "description": "Repair", "qty": "1", "rate": "100.00", "subtotal": "100.00", "total": "108.25", "total_tax": "8.25", "currency_code": "USD" }],
+  "payments": [{ "paymentid": 11, "invoiceid": 7, "date": "2026-08-02", "amount": "25.00", "currency_code": "USD", "name": "Cash" }]
+}

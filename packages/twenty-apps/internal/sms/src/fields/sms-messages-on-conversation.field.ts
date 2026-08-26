@@ -1,0 +1,4 @@
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
+import { SMS_CONVERSATION_MESSAGES_FIELD_UNIVERSAL_IDENTIFIER, SMS_CONVERSATION_OBJECT_UNIVERSAL_IDENTIFIER, SMS_MESSAGE_CONVERSATION_FIELD_UNIVERSAL_IDENTIFIER, SMS_MESSAGE_OBJECT_UNIVERSAL_IDENTIFIER } from 'src/constants/universal-identifiers';
+
+export default defineField({ universalIdentifier: SMS_CONVERSATION_MESSAGES_FIELD_UNIVERSAL_IDENTIFIER, objectUniversalIdentifier: SMS_CONVERSATION_OBJECT_UNIVERSAL_IDENTIFIER, type: FieldType.RELATION, name: 'messages', label: 'Messages', icon: 'IconMessages', relationTargetObjectMetadataUniversalIdentifier: SMS_MESSAGE_OBJECT_UNIVERSAL_IDENTIFIER, relationTargetFieldMetadataUniversalIdentifier: SMS_MESSAGE_CONVERSATION_FIELD_UNIVERSAL_IDENTIFIER, universalSettings: { relationType: RelationType.ONE_TO_MANY } });

@@ -1,0 +1,16 @@
+{
+  "app_id": "01E3S8B6YCMRNR0GGM94H80ACX",
+  "accepted_time": "2020-04-24T08:02:50.184581Z",
+  "message": {
+    "id": "01E6NKBV63YG6K01ENEW7S1N80",
+    "direction": "TO_APP",
+    "contact_message": { "text_message": { "text": "STOP" } },
+    "channel_identity": { "channel": "SMS", "identity": "13125550100", "app_id": "" },
+    "conversation_id": "01E6K4A8PGZ6MV0GD3C7M901MZ",
+    "contact_id": "01E6K4A8N3NANZ05VM0FS80EHD",
+    "accept_time": "2020-04-24T08:02:50.179021Z",
+    "sender_id": "",
+    "processing_mode": "CONVERSATION",
+    "injected": false
+  }
+}

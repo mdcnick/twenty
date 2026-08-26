@@ -1,0 +1,4 @@
+import { defineField, FieldType, OnDeleteAction, RelationType, STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS } from 'twenty-sdk/define';
+import { SMS_CONVERSATION_OBJECT_UNIVERSAL_IDENTIFIER, SMS_CONVERSATION_PERSON_FIELD_UNIVERSAL_IDENTIFIER, PERSON_SMS_CONVERSATIONS_FIELD_UNIVERSAL_IDENTIFIER } from 'src/constants/universal-identifiers';
+
+export default defineField({ universalIdentifier: SMS_CONVERSATION_PERSON_FIELD_UNIVERSAL_IDENTIFIER, objectUniversalIdentifier: SMS_CONVERSATION_OBJECT_UNIVERSAL_IDENTIFIER, type: FieldType.RELATION, name: 'person', label: 'Person', icon: 'IconUser', relationTargetObjectMetadataUniversalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person.universalIdentifier, relationTargetFieldMetadataUniversalIdentifier: PERSON_SMS_CONVERSATIONS_FIELD_UNIVERSAL_IDENTIFIER, universalSettings: { relationType: RelationType.MANY_TO_ONE, onDelete: OnDeleteAction.SET_NULL, joinColumnName: 'personId' } });

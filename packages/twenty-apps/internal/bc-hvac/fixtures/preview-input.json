@@ -1,0 +1,94 @@
+{
+  "relationIndex": {
+    "company": {
+      "perfex:clients:17": ["twenty-company-17"],
+      "perfex:clients:18": ["twenty-company-18a", "twenty-company-18b"]
+    },
+    "person": {
+      "perfex:contacts:33": ["twenty-person-33"]
+    },
+    "equipment": {
+      "perfex:hvac_hub_equipment:9": ["twenty-equipment-9"]
+    },
+    "serviceJob": {
+      "perfex:service_booking_bookings:55": ["twenty-service-job-55"]
+    },
+    "serviceEventToServiceJob": {
+      "perfex:hvac_hub_service_events:71": ["twenty-service-job-55"]
+    },
+    "serviceJobToEquipment": {
+      "perfex:service_booking_bookings:55": ["twenty-equipment-9"]
+    }
+  },
+  "options": {
+    "photoTimezone": "America/Chicago"
+  },
+  "input": {
+    "equipment": [
+      {
+        "id": 9,
+        "client_id": 17,
+        "equipment_type": "Furnace",
+        "brand": "Northstar",
+        "install_date": "2020-01-02",
+        "active": "1"
+      },
+      {
+        "id": 10,
+        "lead_id": 44,
+        "equipment_type": "Heat pump"
+      },
+      {
+        "id": 11,
+        "client_id": 18,
+        "equipment_type": "Air conditioner"
+      }
+    ],
+    "serviceJobs": [
+      {
+        "id": 55,
+        "client_id": 17,
+        "service_contact_id": 33,
+        "system_type": "furnace",
+        "work_intent": "repair",
+        "urgency": "urgent",
+        "appointment_window": "8-10 AM",
+        "source": "phone",
+        "start_datetime": "2026-02-03 08:00:00",
+        "end_datetime": "2026-02-03 10:00:00",
+        "booking_timezone": "America/Chicago",
+        "status": "pending"
+      }
+    ],
+    "serviceEvents": [
+      {
+        "id": 71,
+        "client_id": 17,
+        "equipment_id": 9,
+        "invoice_id": 12,
+        "service_date": "2026-02-03",
+        "description": "Replaced igniter",
+        "labor_total": "125.50",
+        "material_total": "44.00"
+      },
+      {
+        "id": 72,
+        "client_id": 17,
+        "service_date": "2026-02-03",
+        "description": "Inspection"
+      }
+    ],
+    "jobPhotos": [
+      {
+        "id": 81,
+        "project_id": 2,
+        "filename": "heat-pump.jpg",
+        "original_name": "heat-pump-original.jpg",
+        "file_path": "/private/uploads/heat-pump.jpg",
+        "file_type": "image/jpeg",
+        "file_size": "1234",
+        "date_taken": "2026-02-03 08:00:00"
+      }
+    ]
+  }
+}

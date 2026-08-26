@@ -1,0 +1,4 @@
+import { defineField, FieldType, OnDeleteAction, RelationType, STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS } from 'twenty-sdk/define';
+import { COMPANY_SMS_CONSENT_EVENTS_FIELD_UNIVERSAL_IDENTIFIER, SMS_CONSENT_COMPANY_FIELD_UNIVERSAL_IDENTIFIER, SMS_CONSENT_EVENT_OBJECT_UNIVERSAL_IDENTIFIER } from 'src/constants/universal-identifiers';
+
+export default defineField({ universalIdentifier: SMS_CONSENT_COMPANY_FIELD_UNIVERSAL_IDENTIFIER, objectUniversalIdentifier: SMS_CONSENT_EVENT_OBJECT_UNIVERSAL_IDENTIFIER, type: FieldType.RELATION, name: 'company', label: 'Company', icon: 'IconBuilding', relationTargetObjectMetadataUniversalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company.universalIdentifier, relationTargetFieldMetadataUniversalIdentifier: COMPANY_SMS_CONSENT_EVENTS_FIELD_UNIVERSAL_IDENTIFIER, universalSettings: { relationType: RelationType.MANY_TO_ONE, onDelete: OnDeleteAction.SET_NULL, joinColumnName: 'companyId' } });

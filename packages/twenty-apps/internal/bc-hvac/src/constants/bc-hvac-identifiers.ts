@@ -1,0 +1,4 @@
+export const EQUIPMENT_UNIVERSAL_IDENTIFIER =
+  '42cb6fc5-6245-49ad-803e-c65aafd2de4f';
+export const SERVICE_JOB_UNIVERSAL_IDENTIFIER =
+  '519acd70-4148-4635-a2b2-7e2f5ad0ff19';
