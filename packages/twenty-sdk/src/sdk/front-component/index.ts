@@ -5,6 +5,10 @@ export { copyToClipboard } from './functions/copyToClipboard';
 export { getApplicationVariable } from './functions/getApplicationVariable';
 export { enqueueSnackbar } from './functions/enqueueSnackbar';
 export { navigate } from './functions/navigate';
+export { setLiveKitObserverAudioEnabled } from './functions/setLiveKitObserverAudioEnabled';
+export { startLiveKitObserver } from './functions/startLiveKitObserver';
+export type { StartLiveKitObserverParams } from './functions/startLiveKitObserver';
+export { stopLiveKitObserver } from './functions/stopLiveKitObserver';
 export { openCommandConfirmationModal } from './functions/openCommandConfirmationModal';
 export { openSidePanelPage } from './functions/openSidePanelPage';
 export { unmountFrontComponent } from './functions/unmountFrontComponent';
@@ -36,11 +40,17 @@ export type {
   CopyToClipboardFunction,
   EnqueueSnackbarFunction,
   NavigateFunction,
+  LiveKitObserverEvent,
+  LiveKitObserverEventBatch,
+  LiveKitObserverHostFunctions,
+  LiveKitObserverTranscriptSegment,
   OpenCommandConfirmationModalFunction,
   OpenCommandConfirmationModalHostFunction,
   OpenSidePanelPageFunction,
   OpenSidePanelPageParams,
   RequestAccessTokenRefreshFunction,
+  SetLiveKitObserverAudioResult,
+  StartLiveKitObserverResult,
   StorageClearFunction,
   StorageDeleteFunction,
   StorageSetFunction,

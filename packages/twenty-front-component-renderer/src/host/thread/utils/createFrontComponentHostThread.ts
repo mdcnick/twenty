@@ -4,18 +4,21 @@ import { isDefined } from 'twenty-shared/utils';
 import { FRONT_COMPONENT_HOST_COMMUNICATION_API_NOOP } from '@/host/thread/constants/FrontComponentHostCommunicationApiNoop';
 import { type GeometryTracker } from '@/host/geometry/types/GeometryTracker';
 import { type FrontComponentMediaSessionHost } from '@/host/media/types/FrontComponentMediaSessionHost';
+import { type FrontComponentLiveKitObserverHost } from '@/host/livekit-observer/types/FrontComponentLiveKitObserverHost';
 import { type FrontComponentHostThreadExports } from '@/types/FrontComponentHostThreadExports';
 import { type FrontComponentThread } from '@/types/FrontComponentThread';
 import { type HostFetchFunction } from '@/types/HostFetchFunction';
 import { type MediaSessionHostFunctions } from '@/types/MediaSession';
 import { type WorkerExports } from '@/types/WorkerExports';
 import { createClonableErrorThreadSerialization } from '@/utils/clonable-error/createClonableErrorThreadSerialization';
+import { type LiveKitObserverHostFunctions } from 'twenty-sdk/front-component';
 
 type CreateFrontComponentHostThreadInput = {
   hostMessagePort: MessagePort;
   hostFetch: HostFetchFunction;
   geometryTracker: GeometryTracker;
   mediaSessionHost?: FrontComponentMediaSessionHost;
+  liveKitObserverHost?: FrontComponentLiveKitObserverHost;
 };
 
 const MEDIA_SESSION_UNAVAILABLE_FAILURE = {
@@ -52,11 +55,37 @@ const buildMediaSessionThreadExports = (
   };
 };
 
+const LIVEKIT_OBSERVER_UNAVAILABLE_FAILURE = {
+  status: 'failed',
+  errorMessage: 'Live call observation is not available in this surface.',
+} as const;
+
+const buildLiveKitObserverThreadExports = (
+  liveKitObserverHost?: FrontComponentLiveKitObserverHost,
+): LiveKitObserverHostFunctions => {
+  if (isDefined(liveKitObserverHost)) {
+    return {
+      liveKitObserverStart: liveKitObserverHost.liveKitObserverStart,
+      liveKitObserverSetAudioEnabled:
+        liveKitObserverHost.liveKitObserverSetAudioEnabled,
+      liveKitObserverStop: liveKitObserverHost.liveKitObserverStop,
+    };
+  }
+
+  return {
+    liveKitObserverStart: async () => LIVEKIT_OBSERVER_UNAVAILABLE_FAILURE,
+    liveKitObserverSetAudioEnabled: async () =>
+      LIVEKIT_OBSERVER_UNAVAILABLE_FAILURE,
+    liveKitObserverStop: async () => {},
+  };
+};
+
 export const createFrontComponentHostThread = ({
   hostMessagePort,
   hostFetch,
   geometryTracker,
   mediaSessionHost,
+  liveKitObserverHost,
 }: CreateFrontComponentHostThreadInput): FrontComponentThread => {
   const thread = new ThreadMessagePort<
     WorkerExports,
@@ -65,6 +94,7 @@ export const createFrontComponentHostThread = ({
     exports: {
       ...FRONT_COMPONENT_HOST_COMMUNICATION_API_NOOP,
       ...buildMediaSessionThreadExports(mediaSessionHost),
+      ...buildLiveKitObserverThreadExports(liveKitObserverHost),
       hostFetch,
       observeElementGeometry: async (remoteElementIds) => {
         geometryTracker.observe(remoteElementIds);

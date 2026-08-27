@@ -147,6 +147,46 @@ export type StorageClearFunction = (params: {
   storageType: FrontComponentStorageType;
 }) => Promise<void>;
 
+export type LiveKitObserverTranscriptSegment = {
+  id: string;
+  participantIdentity: string;
+  text: string;
+  isFinal: boolean;
+};
+
+export type LiveKitObserverEvent =
+  | {
+      type: 'transcript';
+      observationId: string;
+      segment: LiveKitObserverTranscriptSegment;
+    }
+  | { type: 'disconnected'; observationId: string };
+
+export type LiveKitObserverEventBatch = {
+  events: LiveKitObserverEvent[];
+};
+
+export type StartLiveKitObserverResult =
+  | { status: 'connected'; observationId: string }
+  | { status: 'failed'; errorMessage: string };
+
+export type SetLiveKitObserverAudioResult =
+  | { status: 'updated'; enabled: boolean }
+  | { status: 'failed'; errorMessage: string };
+
+export type LiveKitObserverHostFunctions = {
+  liveKitObserverStart: (params: {
+    observationId: string;
+    serverUrl: string;
+    token: string;
+  }) => Promise<StartLiveKitObserverResult>;
+  liveKitObserverSetAudioEnabled: (params: {
+    observationId: string;
+    enabled: boolean;
+  }) => Promise<SetLiveKitObserverAudioResult>;
+  liveKitObserverStop: (params: { observationId: string }) => Promise<void>;
+};
+
 export type FrontComponentHostCommunicationApiStore = {
   navigate?: NavigateFunction;
   requestAccessTokenRefresh?: RequestAccessTokenRefreshFunction;
@@ -161,6 +201,9 @@ export type FrontComponentHostCommunicationApiStore = {
   storageSet?: StorageSetFunction;
   storageDelete?: StorageDeleteFunction;
   storageClear?: StorageClearFunction;
+  liveKitObserverStart?: LiveKitObserverHostFunctions['liveKitObserverStart'];
+  liveKitObserverSetAudioEnabled?: LiveKitObserverHostFunctions['liveKitObserverSetAudioEnabled'];
+  liveKitObserverStop?: LiveKitObserverHostFunctions['liveKitObserverStop'];
 };
 
 import { FRONT_COMPONENT_HOST_COMMUNICATION_API_KEY } from '../constants/front-component-host-communication-api-key';

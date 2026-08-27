@@ -9,6 +9,7 @@ export { FrontComponentUpdateContextEffect } from '@/host/effect-components/Fron
 export { FrontComponentUpdateHostCommunicationApiEffect } from '@/host/effect-components/FrontComponentUpdateHostCommunicationApiEffect';
 export { FrontComponentWorkerEffect } from '@/host/effect-components/FrontComponentWorkerEffect';
 export { FrontComponentMediaSessionEffect } from '@/host/effect-components/FrontComponentMediaSessionEffect';
+export { FrontComponentLiveKitObserverEffect } from '@/host/effect-components/FrontComponentLiveKitObserverEffect';
 export { createFrontComponentMediaSessionHost } from '@/host/media/utils/createFrontComponentMediaSessionHost';
 export type {
   CreateFrontComponentMediaSessionHostInput,
@@ -17,6 +18,13 @@ export type {
   MediaSessionEventTransport,
   MediaSessionStartVeto,
 } from '@/host/media/types/FrontComponentMediaSessionHost';
+export { createFrontComponentLiveKitObserverHost } from '@/host/livekit-observer/utils/createFrontComponentLiveKitObserverHost';
+export type {
+  CreateFrontComponentLiveKitObserverHostInput,
+  FrontComponentLiveKitObserverHost,
+  LiveKitObserverEventTransport,
+  LiveKitObserverRoomAdapter,
+} from '@/host/livekit-observer/types/FrontComponentLiveKitObserverHost';
 export type {
   MediaRecorderCapabilities,
   MediaSessionEvent,

@@ -19,4 +19,8 @@ export const buildFrontComponentHostCommunicationApiFromThreadImports = (
   storageSet: hostThreadImports.storageSet,
   storageDelete: hostThreadImports.storageDelete,
   storageClear: hostThreadImports.storageClear,
+  liveKitObserverStart: hostThreadImports.liveKitObserverStart,
+  liveKitObserverSetAudioEnabled:
+    hostThreadImports.liveKitObserverSetAudioEnabled,
+  liveKitObserverStop: hostThreadImports.liveKitObserverStop,
 });

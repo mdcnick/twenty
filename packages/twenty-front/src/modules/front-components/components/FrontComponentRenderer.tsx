@@ -3,6 +3,7 @@ import { FrontComponentLoadErrorSnackBarEffect } from '@/front-components/compon
 import { FrontComponentRendererProvider } from '@/front-components/components/FrontComponentRendererProvider';
 import { useFrontComponentExecutionContext } from '@/front-components/hooks/useFrontComponentExecutionContext';
 import { useFrontComponentMediaSession } from '@/front-components/media-session/hooks/useFrontComponentMediaSession';
+import { useFrontComponentLiveKitObserver } from '@/front-components/livekit-observer/hooks/useFrontComponentLiveKitObserver';
 import { useOnApplicationSdkClientChecksumsUpdated } from '@/front-components/hooks/useOnApplicationSdkClientChecksumsUpdated';
 import { useOnFrontComponentUpdated } from '@/front-components/hooks/useOnFrontComponentUpdated';
 import { getFingerprintedRestUrl } from '@/front-components/utils/getFingerprintedRestUrl';
@@ -112,7 +113,10 @@ const FrontComponentRendererContent = ({
     colorScheme,
   });
 
+  const applicationVariables = frontComponent.applicationVariables ?? undefined;
   const { mediaSessionHost } = useFrontComponentMediaSession();
+  const liveKitObserverHost =
+    useFrontComponentLiveKitObserver(applicationVariables);
 
   const handleError = useCallback(
     (error?: Error) => {
@@ -160,8 +164,6 @@ const FrontComponentRendererContent = ({
     checksum: frontComponent.builtComponentChecksum,
   });
 
-  const applicationVariables = frontComponent.applicationVariables ?? undefined;
-
   const isSdkClientReady = !usesSdkClient || !sdkClientChecksumsLoading;
   const isReadyToRender = isDefined(applicationTokenPair) && isSdkClientReady;
 
@@ -189,6 +191,7 @@ const FrontComponentRendererContent = ({
               frontComponentHostCommunicationApi
             }
             mediaSessionHost={mediaSessionHost}
+            liveKitObserverHost={liveKitObserverHost}
             applicationVariables={applicationVariables}
             storageNamespace={storageNamespace}
             onError={handleError}
