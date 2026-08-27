@@ -22,6 +22,8 @@ export const SERVICE_JOB_SOURCE_FIELD_UNIVERSAL_IDENTIFIER =
   '651fe7fd-1983-4480-8d78-f2dbeaddf093';
 export const SERVICE_JOB_SOURCE_REQUEST_ID_FIELD_UNIVERSAL_IDENTIFIER =
   '4341541a-ac90-4c57-bd16-0066aa0c3693';
+export const SERVICE_JOB_SERVICE_ADDRESS_FIELD_UNIVERSAL_IDENTIFIER =
+  'c34fd985-166d-4dd2-9ad9-df492d2ba3bc';
 export const SERVICE_JOB_START_DATETIME_FIELD_UNIVERSAL_IDENTIFIER =
   'becfb2ad-b0a6-4d55-806c-05acdcda2219';
 export const SERVICE_JOB_END_DATETIME_FIELD_UNIVERSAL_IDENTIFIER =
@@ -38,6 +40,8 @@ export const SERVICE_JOB_CLASSIFICATION_FIELD_UNIVERSAL_IDENTIFIER =
   '65983150-939c-4deb-bdc5-c5132cdab6c7';
 export const SERVICE_JOB_NOTES_FIELD_UNIVERSAL_IDENTIFIER =
   '0ceaaa01-c6bc-4096-9162-c8843a18de63';
+export const SERVICE_JOB_CONFIRMATION_SMS_SENT_AT_FIELD_UNIVERSAL_IDENTIFIER =
+  '73f0258c-2517-4bc4-81d6-a9f62084cb5d';
 
 export default defineObject({
   universalIdentifier: SERVICE_JOB_UNIVERSAL_IDENTIFIER,
@@ -126,6 +130,13 @@ export default defineObject({
       isNullable: true,
     },
     {
+      universalIdentifier: SERVICE_JOB_SERVICE_ADDRESS_FIELD_UNIVERSAL_IDENTIFIER,
+      type: FieldType.TEXT,
+      name: 'serviceAddress',
+      label: 'Service address',
+      icon: 'IconMapPin',
+    },
+    {
       universalIdentifier: SERVICE_JOB_START_DATETIME_FIELD_UNIVERSAL_IDENTIFIER,
       type: FieldType.DATE_TIME,
       name: 'startAt',
@@ -184,6 +195,15 @@ export default defineObject({
       name: 'notes',
       label: 'Notes',
       icon: 'IconNotes',
+      isNullable: true,
+    },
+    {
+      universalIdentifier:
+        SERVICE_JOB_CONFIRMATION_SMS_SENT_AT_FIELD_UNIVERSAL_IDENTIFIER,
+      type: FieldType.DATE_TIME,
+      name: 'confirmationSmsSentAt',
+      label: 'Confirmation SMS sent at',
+      icon: 'IconMessageCheck',
       isNullable: true,
     },
   ],

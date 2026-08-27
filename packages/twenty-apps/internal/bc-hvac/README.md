@@ -6,6 +6,15 @@ This private Twenty app supplies the operational HVAC records needed for service
 
 Service jobs are available from the default workspace navigation with a weekly Service call booking calendar. Each calendar entry spans its `startAt` and `endAt` times and surfaces its status, Company, service contact, Equipment, appointment window, and urgency.
 
+## Voice-agent MCP tools
+
+The app defines two server-owned logic functions that Twenty exposes through its MCP tool provider after the app is installed and logic functions are enabled:
+
+- `app_submit_hvac_appointment` validates the confirmed Chicago appointment time, reuses only one exact phone-and-name customer match, checks active Service jobs for overlap, creates the customer and booking idempotently, and optionally requests a confirmation through the authenticated SMS app route.
+- `app_lookup_existing_appointment` finds an active appointment by normalized phone number and returns only `found`, `status`, and `startDatetime`. Multiple matches return `found: false` so the voice agent does not disclose ambiguous customer data.
+
+The submit tool requires a stable `sourceRequestId` for retries. Business callers also require `companyName`; `customerName` remains the named contact. The app stores no provider credentials and never accepts caller-supplied SMS text. Logic-function runtime enablement, app installation, MCP configuration, and voice-agent rollout remain separate deployment steps.
+
 ## Maintenance agreements
 
 The app includes Maintenance agreements, Maintenance coverage, and Maintenance visits. Agreements track status, plan type, start/end and renewal dates, visit entitlement, annual value, billing frequency, and auto-renewal. Coverage connects each agreement to the equipment it protects. Visits connect the promised work to both its agreement and the resulting Service job.

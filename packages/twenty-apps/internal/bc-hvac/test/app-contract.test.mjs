@@ -15,6 +15,7 @@ const NAVIGATION_MENU_ITEMS_DIRECTORY = join(
 );
 const ROLES_DIRECTORY = join(SOURCE_DIRECTORY, 'roles');
 const VIEWS_DIRECTORY = join(SOURCE_DIRECTORY, 'views');
+const LOGIC_FUNCTIONS_DIRECTORY = join(SOURCE_DIRECTORY, 'logic-functions');
 
 const REQUIRED_OBJECTS = [
   'equipment.object.ts',
@@ -348,4 +349,59 @@ test('uses UUID v4 constants and has no provider secret fields', () => {
       `${objectFileName} must contain UUID v4 constants`,
     );
   }
+});
+
+test('exposes only the two server-owned HVAC tool functions', () => {
+  const submitPath = join(
+    LOGIC_FUNCTIONS_DIRECTORY,
+    'submit-hvac-appointment.ts',
+  );
+  const lookupPath = join(
+    LOGIC_FUNCTIONS_DIRECTORY,
+    'lookup-existing-appointment.ts',
+  );
+
+  assert.equal(existsSync(submitPath), true);
+  assert.equal(existsSync(lookupPath), true);
+  assertDirectDefaultDefinition(submitPath, 'defineLogicFunction');
+  assertDirectDefaultDefinition(lookupPath, 'defineLogicFunction');
+  assert.match(readSource(submitPath), /name:\s*'submit-hvac-appointment'/);
+  assert.match(readSource(lookupPath), /name:\s*'lookup-existing-appointment'/);
+  assert.match(readSource(submitPath), /toolTriggerSettings:/);
+  assert.match(readSource(lookupPath), /toolTriggerSettings:/);
+});
+
+test('uniquely indexes voice sourceRequestId and stores address and SMS state', () => {
+  const serviceJobSource = readSource(
+    join(OBJECTS_DIRECTORY, 'service-job.object.ts'),
+  );
+  const sourceRequestIndex = readSource(
+    join(INDEXES_DIRECTORY, 'service-job-source-request-id.index.ts'),
+  );
+
+  assert.match(serviceJobSource, /name:\s*'serviceAddress'/);
+  assert.match(serviceJobSource, /name:\s*'confirmationSmsSentAt'/);
+  assert.match(sourceRequestIndex, /isUnique:\s*true/);
+  assert.match(
+    sourceRequestIndex,
+    /SERVICE_JOB_SOURCE_FIELD_UNIVERSAL_IDENTIFIER/,
+  );
+  assert.match(
+    sourceRequestIndex,
+    /SERVICE_JOB_SOURCE_REQUEST_ID_FIELD_UNIVERSAL_IDENTIFIER/,
+  );
+});
+
+test('grants app functions only required CRM record access', () => {
+  const roleSource = readSource(join(ROLES_DIRECTORY, 'default-role.ts'));
+
+  assert.match(roleSource, /STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS\.person/);
+  assert.match(roleSource, /STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS\.company/);
+  assert.match(roleSource, /SERVICE_JOB_UNIVERSAL_IDENTIFIER/);
+  assert.match(roleSource, /canReadObjectRecords:\s*true/);
+  assert.match(roleSource, /canUpdateObjectRecords:\s*true/);
+  assert.match(roleSource, /canSoftDeleteObjectRecords:\s*false/);
+  assert.match(roleSource, /canDestroyObjectRecords:\s*false/);
+  assert.doesNotMatch(roleSource, /canReadAllObjectRecords:\s*true/);
+  assert.doesNotMatch(roleSource, /canUpdateAllObjectRecords:\s*true/);
 });

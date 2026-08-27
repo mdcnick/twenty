@@ -1,6 +1,6 @@
 {
   "name": "bc-hvac",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "license": "MIT",
   "engines": {
     "node": "^24.5.0",
@@ -21,7 +21,7 @@
     "lint": "oxlint -c .oxlintrc.json .",
     "lint:fix": "oxlint --fix -c .oxlintrc.json .",
     "typecheck": "tsgo --noEmit -p tsconfig.spec.json",
-    "test": "vitest run test/migration",
+    "test": "vitest run test/migration test/logic",
     "test:contract": "node --test test/app-contract.test.mjs",
     "preview:migration": "node scripts/preview-migration.cjs"
   },
