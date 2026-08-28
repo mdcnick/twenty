@@ -35,6 +35,7 @@ import { type FrontComponentHostThread } from '@/types/FrontComponentHostThread'
 import { type FrontComponentHostThreadExports } from '@/types/FrontComponentHostThreadExports';
 import { type WorkerExports } from '@/types/WorkerExports';
 import { createClonableErrorThreadSerialization } from '@/utils/clonable-error/createClonableErrorThreadSerialization';
+import { dispatchLiveKitObserverEvents } from '@/remote/worker/livekit-observer/utils/dispatchLiveKitObserverEvents';
 
 installStylePropertyOnRemoteElements();
 patchRemoteElementAttributes();
@@ -131,6 +132,9 @@ const workerExports: WorkerExports = {
   },
   pushMediaSessionEvents: async (batch) => {
     workerMediaBridge.dispatchEvents(batch);
+  },
+  pushLiveKitObserverEvents: async (batch) => {
+    dispatchLiveKitObserverEvents(batch);
   },
 };
 

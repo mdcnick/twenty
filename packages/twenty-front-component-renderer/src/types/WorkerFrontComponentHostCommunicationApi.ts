@@ -3,6 +3,7 @@ import {
   type CopyToClipboardFunction,
   type EnqueueSnackbarFunction,
   type NavigateFunction,
+  type LiveKitObserverHostFunctions,
   type OpenCommandConfirmationModalFunction,
   type OpenSidePanelPageFunction,
   type RequestAccessTokenRefreshFunction,
@@ -28,4 +29,7 @@ export type WorkerFrontComponentHostCommunicationApi = {
   storageSet?: StorageSetFunction;
   storageDelete?: StorageDeleteFunction;
   storageClear?: StorageClearFunction;
+  liveKitObserverStart?: LiveKitObserverHostFunctions['liveKitObserverStart'];
+  liveKitObserverSetAudioEnabled?: LiveKitObserverHostFunctions['liveKitObserverSetAudioEnabled'];
+  liveKitObserverStop?: LiveKitObserverHostFunctions['liveKitObserverStop'];
 };

@@ -8,6 +8,7 @@ import { createFrontComponentHostThread } from '@/host/thread/utils/createFrontC
 import { createHostFetchEnforcingPolicy } from '@/host/fetch/utils/createHostFetchEnforcingPolicy';
 import { type GeometryTracker } from '@/host/geometry/types/GeometryTracker';
 import { type FrontComponentMediaSessionHost } from '@/host/media/types/FrontComponentMediaSessionHost';
+import { type FrontComponentLiveKitObserverHost } from '@/host/livekit-observer/types/FrontComponentLiveKitObserverHost';
 import { fetchComponentSource } from '@/host/component-source/utils/fetchComponentSource';
 import { fetchSdkClientSources } from '@/host/component-source/utils/fetchSdkClientSources';
 import { buildFrontComponentStorageSnapshots } from '@/host/storage/utils/buildFrontComponentStorageSnapshots';
@@ -31,6 +32,7 @@ type FrontComponentWorkerEffectProps = {
   storageNamespace?: string;
   geometryTracker: GeometryTracker;
   mediaSessionHost?: FrontComponentMediaSessionHost;
+  liveKitObserverHost?: FrontComponentLiveKitObserverHost;
   setReceiver: React.Dispatch<React.SetStateAction<RemoteReceiver | null>>;
   setThread: React.Dispatch<React.SetStateAction<FrontComponentThread | null>>;
   setError: React.Dispatch<React.SetStateAction<Error | null>>;
@@ -47,6 +49,7 @@ export const FrontComponentWorkerEffect = ({
   storageNamespace,
   geometryTracker,
   mediaSessionHost,
+  liveKitObserverHost,
   setReceiver,
   setThread,
   setError,
@@ -82,6 +85,7 @@ export const FrontComponentWorkerEffect = ({
       hostFetch,
       geometryTracker,
       mediaSessionHost,
+      liveKitObserverHost,
     });
 
     const handleSandboxMessage = createFrontComponentSandboxMessageHandler({
@@ -182,6 +186,7 @@ export const FrontComponentWorkerEffect = ({
     storageNamespace,
     geometryTracker,
     mediaSessionHost,
+    liveKitObserverHost,
     setError,
     setReceiver,
     setThread,
